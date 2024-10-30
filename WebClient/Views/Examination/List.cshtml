@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ViewModels.MedicalRecordModel>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <h2 class="mb-4">Medical Examination Records</h2>
+
+        <!-- Add New Button -->
+        <div>
+            <a asp-controller="Examination" asp-action="Register" class="btn btn-primary mb-3">Register for online medical examination</a>
+
+        </div>
+    </div>
+
+    <!-- Medical Records Table -->
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>Register Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Age</th>
+                    <th>Symptoms</th>
+                    <th>Doctor</th>
+                    <th>Service</th>
+                    <th>Progression</th>
+                    <th style="width: 110px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var record in Model)
+                {
+                    <tr>
+                        <td>@record.RegisterDate.ToString("yyyy-MM-dd HH:mm:ss tt")</td>
+                        <td>@record.PatientName</td>
+                        <td>@record.Email</td>
+                        <td>@record.Phone</td>
+                        <td>@record.Age</td>
+                        <td>@record.Symptoms</td>
+                        <td>@record.Doctor.Name</td>
+                        <td>@record.Service.Name</td>
+                        <td>
+                            <span class="badge @(record.Status ? "bg-success" : "bg-danger")">
+                                @(record.Status ? "Done" : "In Process")
+                            </span>
+                        </td>
+                        <td>
+                            <a asp-controller="Examination" asp-action="Details" asp-route-id="@record.Id" class="text-white btn btn-info btn-sm">View Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h6 class="text-center text-danger">No medical records in the system.</h6>
+    }
+</div>
+

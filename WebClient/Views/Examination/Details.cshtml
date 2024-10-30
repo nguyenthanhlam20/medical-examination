@@ -1,0 +1,51 @@
+﻿@model ViewModels.MedicalRecordModel
+
+<div class="container mt-3">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="card-title m-0">Medical Examination and Treatment History</h4>
+        </div>
+        <div class="card-body p-3">
+            <div>
+                <h4 class="text-primary">Visit and hospitalizations</h4>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Reason for examination/hospitalization:</strong> @Model.Reasons</p>
+                        <p><strong>Symtom:</strong> @Model.Symptoms</p>
+                        <p><strong>Diagnose:</strong> @Model.Diagnose</p>
+                        <p><strong>Tests and results:</strong> @Model.Results</p>
+                        <p><strong>Treatment regimen:</strong> @Model.Service.Name</p>
+                        <p>
+                            <strong>Treatment Progression:</strong>   <span class="badge @(Model.Status ? "bg-success" : "bg-danger")">
+                                @(Model.Status ? "Done" : "In Process")
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Patient Name:</strong> @Model.PatientName</p>
+                        <p><strong>Age:</strong> @Model.Age</p>
+                        <p><strong>Register Date:</strong> @Model.RegisterDate.ToString("yyyy-MM-dd hh:mm:ss tt")</p>
+                        <p><strong>Email:</strong> @Model.Email</p>
+                        <p><strong>Phone:</strong> @Model.Phone</p>
+                       
+                    </div>
+                </div>
+           </div>
+
+            <div class="border-top pt-2 mt-2">
+                <h4 class="text-primary">Doctor's notes and instructions</h4>
+                <p><strong>Doctor Name:</strong> @Model.Doctor.Name</p>
+                <p><strong>Age:</strong> @Model.Doctor.Age</p>
+                <p><strong>Year of experience:</strong> <span>@Model.Doctor.YearOfExperience</span>+</p>
+                <p><strong>Clinial assessmnet:</strong> @Model.Assessments</p>
+                <p><strong>Instructions for treatment and care:</strong> @Model.Instructions</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-controller="Examination" asp-action="List" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

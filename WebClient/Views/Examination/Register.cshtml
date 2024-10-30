@@ -1,0 +1,75 @@
+﻿@model ViewModels.RegisterExaminationModel
+
+@{
+    var selectService = ViewData["selectService"] as SelectList;
+}
+
+<div class="card mt-5 rounded">
+    <div class="card-header text-white bg-primary text-center">
+        <h4 class="mb-0">Register Medical Examination Online</h4>
+    </div>
+
+    <!-- Form to create a new examination -->
+   <div class="p-3">
+        <form asp-controller="Examination" asp-action="Register" method="post" asp-antiforgery="true">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="RegisterDate" class="form-label">Register Date</label>
+                    <input type="datetime-local" class="form-control" id="RegisterDate" name="RegisterDate" asp-for="RegisterDate" required placeholder="Select date and time" />
+                    <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="ServiceId" class="form-label">Medical Service</label>
+                    @Html.DropDownListFor(model => model.ServiceId, selectService, "Select a service", new { @class = "form-control", @id = "ServiceId" })
+                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="PatientName" class="form-label">Patient Name</label>
+                    <input type="text" class="form-control" id="PatientName" name="PatientName" asp-for="PatientName" required placeholder="Enter patient's name" />
+                    <span asp-validation-for="PatientName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="Email" name="Email" asp-for="Email" required placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="Phone" class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="Phone" name="Phone" asp-for="Phone" required placeholder="Enter phone number" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="Age" name="Age" asp-for="Age" required placeholder="Enter age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="Symptoms" class="form-label">Symptoms</label>
+                    <textarea class="form-control" id="Symptoms" name="Symptoms" asp-for="Symptoms" rows="3" required placeholder="Describe symptoms"></textarea>
+                    <span asp-validation-for="Symptoms" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Reasons" class="form-label">Reasons</label>
+                    <textarea class="form-control" id="Reasons" name="Reasons" asp-for="Reasons" rows="3" required placeholder="Describe reasons for examination"></textarea>
+                    <span asp-validation-for="Reasons" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary me-1">Submit</button>
+            <a asp-controller="Examination" asp-action="List" class="btn btn-secondary">Cancel</a>
+        </form>
+   </div>
+</div>
